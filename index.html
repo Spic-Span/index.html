@@ -1,135 +1,121 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Ticking Clock</title>
-    <style>
-      .clock-container {
-        position: relative;
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        background-color: black;
-        overflow: hidden;
-      }
+<head>
+	<title>Beautiful Ticking Clock</title>
+	<style>
+		body {
+			background-color: #fff;
+		}
 
-      .clock-face {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background-color: blue;
-        box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.1);
-      }
+		.container {
+			position: relative;
+			width: 300px;
+			height: 300px;
+			margin: 50px auto;
+			background-color: #ccc;
+			border-radius: 50%;
+			box-shadow: 0px 0px 10px #000;
+			overflow: hidden;
+		}
 
-      .hand {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform-origin: bottom center;
-        background-color: white;
-      }
+		.container::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 200px;
+			height: 200px;
+			background-color: #000;
+			border-radius: 50%;
+			box-shadow: inset 0px 0px 20px #666;
+		}
 
-      .hour-hand {
-        width: 6px;
-        height: 50px;
-        border-radius: 6px 6px 0 0;
-        transform: translateX(-50%) rotate(0deg);
-      }
+		.hour-hand {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform-origin: bottom center;
+			transform: translate(-50%, -100%);
+			width: 6px;
+			height: 70px;
+			background-color: #ccc;
+			border-radius: 10px;
+			box-shadow: 0px 0px 5px #fff;
+			z-index: 3;
+		}
 
-      .minute-hand {
-        width: 4px;
-        height: 70px;
-        border-radius: 4px 4px 0 0;
-        transform: translateX(-50%) rotate(0deg);
-      }
+		.minute-hand {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform-origin: bottom center;
+			transform: translate(-50%, -100%);
+			width: 4px;
+			height: 90px;
+			background-color: #aaa;
+			border-radius: 10px;
+			box-shadow: 0px 0px 5px #fff;
+			z-index: 4;
+		}
 
-      .clock-number {
-        position: absolute;
-        font-size: 16px;
-        font-weight: bold;
-        color: black;
-        transform-origin: center center;
-      }
+		.second-hand {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform-origin: bottom center;
+			transform: translate(-50%, -100%);
+			width: 2px;
+			height: 100px;
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0px 0px 5px #fff;
+			z-index: 5;
+			animation: tick 1s linear infinite;
+		}
 
-      .number-1 {
-        top: 10%;
-        left: 50%;
-        transform: translate(-50%, -100%);
-      }
+		@keyframes tick {
+			0% {
+				transform: translate(-50%, -100%) rotate(0deg);
+			}
 
-      .number-2 {
-        top: 20%;
-        left: 80%;
-        transform: translate(-100%, -50%);
-      }
+			100% {
+				transform: translate(-50%, -100%) rotate(360deg);
+			}
+		}
 
-      .number-3 {
-        top: 50%;
-        right: 0%;
-        transform: translate(0%, -50%);
-      }
+		.mark {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform-origin: center center;
+			width: 2px;
+			height: 10px;
+			background-color: #000;
+			transform: translate(-50%, -85%);
+			z-index: 6;
+		}
 
-      .number-4 {
-        bottom: 20%;
-        left: 80%;
-        transform: translate(-100%, 50%);
-      }
+		.mark::before {
+			content: "";
+			position: absolute;
+			top: -2px;
+			left: -2px;
+			width: 6px;
+			height: 6px;
+			background-color: #fff;
+			border-radius: 50%;
+		}
 
-      .number-5 {
-        bottom: 10%;
-        left: 50%;
-        transform: translate(-50%, 100%);
-      }
+		.mark-hour {
+			height: 20px;
+			transform: translate(-50%, -80%);
+			z-index: 7;
+		}
 
-      .number-6 {
-        bottom: 0%;
-        left: 50%;
-        transform: translate(-50%, 100%);
-      }
-
-      .number-7 {
-        bottom: 10%;
-        right: 50%;
-        transform: translate(50%, 100%);
-      }
-
-      .number-8 {
-        bottom: 20%;
-        right: 80%;
-        transform: translate(100%, 50%);
-      }
-
-      .number-9 {
-        top: 50%;
-        left: 0%;
-        transform: translate(0%, -50%);
-      }
-
-      .number-10 {
-        bottom: 20%;
-        left: 20%;
-        transform: translate(0%, 50%);
-      }
-
-      .number-11 {
-        top: 20%;
-        left: 20%;
-        transform: translate(0%, -50%);
-      }
-
-      .number-12 {
-        top: 0%;
-        left: 50%;
-        transform: translate(-50%, -100%);
-      }
-    </style>
-  </head>
-  <body>
-    <div class="clock-container">
-      <div class="clock-face">
-        <div class="hour-hand hand"></div>
-        <div class="minute-hand hand"></div>
-        <div class="clock-number number-1">1</div>
-        <div
+		.mark-hour::before {
+			content: "";
+			position: absolute;
+			top: -4px;
+			left: -4px;
+			width:
